@@ -19,19 +19,32 @@
                 <button type="button" id="searchButton">Rechercher</button>
             </div>
         </section>
-        <section id="task-creation">
-            <h2>Ajouter une Tâche</h2>
-            <form id="taskForm">
-                <input type="text" name="taskTitle" id="taskTitle" placeholder="Titre de la tâche" required>
-                <textarea name="taskDescription" id="taskDescription" placeholder="Description de la tâche" required></textarea>
-                <input name="date" type="date" id="taskDueDate" required>
-                <select name="taskPriority" id="taskPriority" required>
-                    <option value="low">Faible</option>
-                    <option value="medium" selected>Moyenne</option>
-                    <option value="high">Haute</option>
-                </select>
-                <button type="submit">Ajouter Tâche</button>
-            </form>
+        <section class="create">
+            <section id="task-creation">
+                <h2>Ajouter une Tâche</h2>
+                <form id="taskForm">
+                    <input type="text" name="taskTitle" id="taskTitle" placeholder="Titre de la tâche" required>
+                    <textarea name="taskDescription" id="taskDescription" placeholder="Description de la tâche" required></textarea>
+                    <input name="date" type="date" id="taskDueDate" required>
+                    <select name="taskPriority" id="taskPriority" required>
+                        <option value="low">Faible</option>
+                        <option value="medium" selected>Moyenne</option>
+                        <option value="high">Haute</option>
+                    </select>
+                    <select name="taskCategory" id="taskCategory" required>
+                        <option value="none">Aucun</option>
+                    </select>
+                    <button type="submit">Ajouter Tâche</button>
+                </form>
+            </section>
+
+            <section id="category-creation">
+                <h2>Ajouter une Catégorie</h2>
+                <form id="categoryForm">
+                    <input type="text" name="categoryTitle" id="categoryTitle" placeholder="Titre de la catégorie" required>
+                    <button type="submit">Ajouter Categorie</button>
+                </form>
+            </section>
         </section>
         <section id="task-filter">
             <h2>Filtrer les Tâches</h2>

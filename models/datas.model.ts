@@ -1,11 +1,11 @@
 export interface Task {
    title: string,
-   description: string | undefined,
+   description: string,
    date: string,
    priority: string
+   category: Category | undefined
 }
 
 export interface Category {
-   title: string,
-   description: string
+   title: string
 }
