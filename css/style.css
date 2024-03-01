@@ -27,11 +27,11 @@ h1, h2 {
 
 /* Form */
 
-#taskForm {
+#taskForm, #categoryForm {
     margin-bottom: 20px;
 }
 
-#taskForm input, #taskForm select, #taskForm textarea {
+#taskForm input, #taskForm select, #taskForm textarea, #categoryForm input {
     display: block;
     width: 100%;
     padding: 10px;
@@ -39,7 +39,7 @@ h1, h2 {
     box-sizing: border-box;
 }
 
-#taskForm button {
+#taskForm button, #categoryForm button {
     background-color: #5cb85c;
     color: white;
     padding: 10px 20px;
@@ -47,7 +47,7 @@ h1, h2 {
     cursor: pointer;
 }
 
-#taskForm button:hover {
+#taskForm button:hover, #categoryForm button:hover {
     background-color: #4cae4c;
 }
 

@@ -51,14 +51,18 @@ function handleCreationCategory(event: Event) {
 // display in html all the categories in a select in the taskForm
 function displayCategory(){
    let formCategory = new CategoryManager()
-   const listTasks = document.getElementById("taskCategory");
+   const listCategory = document.getElementById("taskCategory");
+   const listFilterCategory = document.getElementById("filterCategory");
+   const listModifyCategory = document.getElementById("modifyTaskPriority");
    let category = formCategory.getCategory()
    category?.forEach((element) => {
       const option = document.createElement('option')
       option.value = element.title
       option.textContent = element.title
 
-      listTasks?.appendChild(option);
+      listCategory?.appendChild(option);
+      listFilterCategory?.appendChild(option);
+      listModifyCategory?.appendChild(option);
   });
 }
 

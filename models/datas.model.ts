@@ -3,7 +3,13 @@ export interface Task {
    description: string,
    date: string,
    priority: string
-   category: Category | undefined
+   category: string | undefined
+}
+
+export interface Filter {
+   priority: string
+   date: string,
+   category: string
 }
 
 export interface Category {

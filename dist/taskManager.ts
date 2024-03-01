@@ -1,4 +1,5 @@
 import { Task } from "../models/datas.model.js";
+import { Filter } from "../models/datas.model.js";
 
 class TaskManager {
 
@@ -14,31 +15,49 @@ class TaskManager {
             getItem(this.allTasks)
             return this.allTasks
          } else if (mode === "search") {
-            let truc = this.allTasks.filter(task =>
-               task.title.includes(keyword!)
+            let item = this.allTasks.filter(task =>
+               task.title.toLowerCase().includes(keyword!.toLowerCase())
             );
-            getItem(truc)
-            console.log(truc);
-            return truc
+            getItem(item)
+            return item
          } else if (mode === "filter") {
-            let truc = this.allTasks
-            if (filter?.priority !== "all" && filter?.date === "") {
-               truc = this.allTasks.filter(task =>
-                  task.priority === filter?.priority
+            let item = this.allTasks
+            let isPriorityFiltered = filter?.priority === "all" ? false : true
+            let isCategoryFiltered = filter?.category === "none" ? false : true
+            let isDateFiltered = filter?.date === "" ? false : true
+
+            // list of all the possibilities of the filter
+            if (isPriorityFiltered && !isCategoryFiltered && !isDateFiltered) {
+               item = this.allTasks.filter(task =>
+                  task.priority === filter.priority
                );               
-            } else if (filter?.priority !== "all" && filter?.date !== "") {
-               truc = this.allTasks.filter(task =>
-                  task.priority === filter?.priority && task.date === filter.date
-               );
-            } else if (filter?.priority === "all" && filter?.date !== "") {
-               truc = this.allTasks.filter(task =>
+            } else if (!isPriorityFiltered && !isCategoryFiltered && isDateFiltered) {
+               item = this.allTasks.filter(task =>
                   task.date === filter.date
                );
+            } else if (!isPriorityFiltered && isCategoryFiltered && !isDateFiltered) {
+               item = this.allTasks.filter(task =>
+                  task.category === filter.category
+               );
+            } else if (isPriorityFiltered && !isCategoryFiltered && isDateFiltered) {
+               item = this.allTasks.filter(task =>
+                  task.priority === filter?.priority && task.date === filter?.date
+               );
+            } else if (isPriorityFiltered && isCategoryFiltered && !isDateFiltered) {
+               item = this.allTasks.filter(task =>
+                  task.priority === filter?.priority && task.category === filter?.category
+               );
+            } else if (!isPriorityFiltered && isCategoryFiltered && isDateFiltered) {
+               item = this.allTasks.filter(task =>
+                  task.date === filter?.date && task.category === filter?.category
+               );
+            } else if (isPriorityFiltered && isCategoryFiltered && isDateFiltered) {
+               item = this.allTasks.filter(task =>
+                  task.priority === filter?.priority && task.date === filter?.date && task.category === filter?.category
+               );
             }
-            console.log(truc);
-            getItem(truc)
-
-            return truc
+            getItem(item)
+            return item
          }
       }
    }  
@@ -76,10 +95,7 @@ class TaskManager {
    }
 
    // update task
-   updateTask(task: Task, newTask: Task) {
-      console.log(task);
-      console.log(newTask);
-      
+   updateTask(task: Task, newTask: Task) {      
       let localStorageDatas = localStorage.getItem('@listTasks')
       if (localStorageDatas) {
          this.allTasks = JSON.parse(localStorageDatas);
@@ -105,12 +121,14 @@ function handleCreateTask(event: Event, mode?: Task, index?: number) {
    const description = data.get(mode ? `modifyTaskDescription` : 'taskDescription') as string
    const date = data.get(mode ? `modifyDate` : 'date') as string
    const priority = data.get(mode ? `modifyTaskPriority` : 'taskPriority') as string
+   const category = data.get(mode ? `modifyTaskCategory` : 'taskCategory') as string
 
    const list: Task = {
       title,
       description,
       date,
-      priority
+      priority,
+      category
    }
 
    if (mode) {
@@ -137,7 +155,7 @@ function getItem(item: Task){
       // inject div task in html
       taskElement.innerHTML = `
           <div class="task ${element.priority}" value="${index}">
-              <h3>${element.title}<span> - ${element.priority}</span></h3>
+              <h3>${element.title}<span> - ${element.priority} ${element.category ? " - " + element.category : ""}</span></h3>
               <p>Date d'échéance: ${element.date}</p>
               <p>${element.description}</p>
               <button type="button" class="delete-btn">Supprimer</button>
@@ -151,6 +169,9 @@ function getItem(item: Task){
                   <option value="low">Faible</option>
                   <option value="medium" selected>Moyenne</option>
                   <option value="high">Haute</option>
+              </select>
+              <select name="modifyTaskCategory" id="modifyTaskCategory" required>
+                  <option value="low">Aucun</option>
               </select>
               <button type="submit">Update tâche</button>
           </form>
@@ -214,18 +235,21 @@ function searchThing() {
 function filterEvent(event: Event) {
    event.preventDefault();
 
-   const filtre = document.getElementById("filterDate")
-   const mot = document.getElementById("filterPriority")
+   const filterDate = document.getElementById("filterDate")
+   const filterPriority = document.getElementById("filterPriority")
+   const filterCategory = document.getElementById("filterCategory")
 
    let formTask = new TaskManager()
 
-   // get data from taskForm
-   const date = filtre.value
-   const priority = mot.value
+   // get data filter from taskForm
+   const priority = filterPriority?.value
+   const date = filterDate?.value
+   const category = filterCategory?.value
 
-   const list = {
+   const list: Filter = {
+      priority,
       date,
-      priority
+      category
    }
    
    formTask.getTasks("filter","", list)

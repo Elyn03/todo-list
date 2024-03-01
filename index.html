@@ -19,45 +19,45 @@
                 <button type="button" id="searchButton">Rechercher</button>
             </div>
         </section>
-        <section class="create">
-            <section id="task-creation">
-                <h2>Ajouter une Tâche</h2>
-                <form id="taskForm">
-                    <input type="text" name="taskTitle" id="taskTitle" placeholder="Titre de la tâche" required>
-                    <textarea name="taskDescription" id="taskDescription" placeholder="Description de la tâche" required></textarea>
-                    <input name="date" type="date" id="taskDueDate" required>
-                    <select name="taskPriority" id="taskPriority" required>
-                        <option value="low">Faible</option>
-                        <option value="medium" selected>Moyenne</option>
-                        <option value="high">Haute</option>
-                    </select>
-                    <select name="taskCategory" id="taskCategory" required>
-                        <option value="none">Aucun</option>
-                    </select>
-                    <button type="submit">Ajouter Tâche</button>
-                </form>
-            </section>
-
-            <section id="category-creation">
-                <h2>Ajouter une Catégorie</h2>
-                <form id="categoryForm">
-                    <input type="text" name="categoryTitle" id="categoryTitle" placeholder="Titre de la catégorie" required>
-                    <button type="submit">Ajouter Categorie</button>
-                </form>
-            </section>
+        <section id="task-creation">
+            <h2>Ajouter une Tâche</h2>
+            <form id="taskForm">
+                <input type="text" name="taskTitle" id="taskTitle" placeholder="Titre de la tâche" required>
+                <textarea name="taskDescription" id="taskDescription" placeholder="Description de la tâche" required></textarea>
+                <input name="date" type="date" id="taskDueDate" required>
+                <select name="taskPriority" id="taskPriority" required>
+                    <option value="low">Faible</option>
+                    <option value="medium" selected>Moyenne</option>
+                    <option value="high">Haute</option>
+                </select>
+                <select name="taskCategory" id="taskCategory" required>
+                    <option value="none">Aucun</option>
+                </select>
+                <button type="submit">Ajouter Tâche</button>
+            </form>
+        </section>
+        <section id="category-creation">
+            <h2>Ajouter une Catégorie</h2>
+            <form id="categoryForm">
+                <input type="text" name="categoryTitle" id="categoryTitle" placeholder="Titre de la catégorie" required>
+                <button type="submit">Ajouter Categorie</button>
+            </form>
         </section>
         <section id="task-filter">
             <h2>Filtrer les Tâches</h2>
             <form id="filterForm">
-                <label for="filterPriority">Filtrer par Priorité :</label>
+                <label for="filterPriority">Priorité :</label>
                 <select id="filterPriority">
                     <option value="all">Toutes</option>
                     <option value="high">Haute</option>
                     <option value="medium">Moyenne</option>
                     <option value="low">Faible</option>
                 </select>
-
-                <label for="filterDate">Filtrer par Date :</label>
+                <label for="filterCategory">Catégorie :</label>
+                <select id="filterCategory" required>
+                    <option value="none">Aucun</option>
+                </select>
+                <label for="filterDate">Date :</label>
                 <input type="date" id="filterDate">
 
                 <button type="button" id="applyFilter">Appliquer Filtre</button>
