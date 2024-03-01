@@ -16,5 +16,8 @@
 2. Install npm 
 3. Install all the dependencies running pnpm install.
 
-## Run
+## Compile
 ```npm start```
+
+
+### Autor : Céline Eap

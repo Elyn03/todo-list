@@ -22,6 +22,8 @@ class TaskManager {
             return item
          } else if (mode === "filter") {
             let item = this.allTasks
+            
+            // variables, is filtered or not ?
             let isPriorityFiltered = filter?.priority === "all" ? false : true
             let isCategoryFiltered = filter?.category === "none" ? false : true
             let isDateFiltered = filter?.date === "" ? false : true
@@ -63,12 +65,12 @@ class TaskManager {
    }  
 
    // set tasks in localStorage
-   updateTasks(item: any[]) {
+   updateTasks(item: any[]): void {
       localStorage.setItem('@listTasks', JSON.stringify(item))
    }
 
    // create task
-   createTask(task: Task) {
+   createTask(task: Task): void {
       let localStorageDatas = localStorage.getItem('@listTasks')
       if (localStorageDatas) {
          // if LS not empty, push new task in Tasks
@@ -82,7 +84,7 @@ class TaskManager {
    }
 
    // delete task
-   deleteTask(index: number) {
+   deleteTask(index: number): void {
       let localStorageDatas = localStorage.getItem('@listTasks')
       if (localStorageDatas) {
          this.allTasks = JSON.parse(localStorageDatas);
@@ -95,7 +97,7 @@ class TaskManager {
    }
 
    // update task
-   updateTask(task: Task, newTask: Task) {      
+   updateTask(task: Task, newTask: Task): void {      
       let localStorageDatas = localStorage.getItem('@listTasks')
       if (localStorageDatas) {
          this.allTasks = JSON.parse(localStorageDatas);
@@ -169,9 +171,6 @@ function getItem(item: Task){
                   <option value="low">Faible</option>
                   <option value="medium" selected>Moyenne</option>
                   <option value="high">Haute</option>
-              </select>
-              <select name="modifyTaskCategory" id="modifyTaskCategory" required>
-                  <option value="low">Aucun</option>
               </select>
               <button type="submit">Update tâche</button>
           </form>

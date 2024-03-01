@@ -31,7 +31,7 @@ h1, h2 {
     margin-bottom: 20px;
 }
 
-#taskForm input, #taskForm select, #taskForm textarea, #categoryForm input {
+#modifyTaskTitle, #modifyTaskDescription, #modifyTaskDueDate, #modifyTaskPriority, #taskForm input, #taskForm select, #taskForm textarea, #categoryForm input {
     display: block;
     width: 100%;
     padding: 10px;
